@@ -2,6 +2,8 @@ get:
   tags:
     - Location
   summary: Returns a list of location suggestions
+  description: |
+    Provides the place suggestions based on given partial or full place name.
   operationId: GetLocationAutocomplete
   parameters:
     - $ref: '../schemas/requests/location/cordinates.yaml'

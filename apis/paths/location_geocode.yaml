@@ -2,6 +2,8 @@ get:
   tags:
     - Location
   summary: Returns a geographic info of a place
+  description: |
+    Provides the exact geographic information for the given place id.
   operationId: GetLocationGeocode
   parameters:
     - in: path
