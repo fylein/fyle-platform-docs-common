@@ -1,0 +1,289 @@
+openapi: 3.0.3
+info:
+  version: '3.0'
+  title: Fyle REST API
+  contact:
+    name: Integrations
+    email: support@fyle.in
+servers:
+  - url: 'https://accounts.fylehq.com'
+    description: Live Server
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://accounts.fylehq.com/app/developers/#/oauth/authorize'
+          tokenUrl: 'https://accounts.fylehq.com/oauth/token'
+          scopes:
+            common.*: Grant all COMMON actions
+  parameters:
+    cordinates:
+      in: query
+      name: location
+      description: >
+        This param specifies the point around which you wish to retrieve place
+        information.<br>
+
+        location=latitude,longitude
+      schema:
+        type: string
+        example: '26.595889,85.4891037'
+    text:
+      in: query
+      name: text
+      required: true
+      description: >
+        The text string on which to search. The Location Autocomplete service
+        will return candidate matches based on this string and order results
+        based on their perceived relevance.<br>
+
+        text=bangalore
+      schema:
+        type: string
+        example: bangalore
+    types:
+      in: query
+      name: type
+      required: true
+      description: |
+        This param will define the types of place results to return.<br>
+        types=(cities)
+      schema:
+        type: string
+        example: (cities)
+    user_id:
+      in: query
+      name: user_id
+      required: true
+      description: >
+        This param will contain the user_id of the user who is requesting this
+        API.
+
+        user_id=usvd78228jQS.<br>
+      schema:
+        type: string
+        example: usvd78228jQS
+  schemas:
+    '401':
+      type: object
+      properties:
+        message:
+          enum:
+            - invalid token
+          type: string
+          description: >
+            This error means that the input access token is either not issued by
+            Fyle or has expired.
+
+            You need to generate a new access token.
+    count:
+      description: |
+        The total number of objects that can be requested.
+      type: integer
+      example: 10000
+    location_autocomplete:
+      type: object
+      properties:
+        predictions:
+          type: array
+          items:
+            type: object
+            properties:
+              description:
+                type: string
+                maxLength: 255
+                description: |
+                  Contains the human-readable name for the returned result.
+                readOnly: true
+                example: 'Andheri, Maharashtra, India'
+              matched_substrings:
+                type: array
+                description: >
+                  These describe the location of the entered term in the
+                  prediction result text, so that the term can be highlighted if
+                  desired.
+                items:
+                  type: object
+                  properties:
+                    length:
+                      type: number
+                      description: |
+                        For what length of the given text was matched.
+                      example: 4
+                    offset:
+                      type: number
+                      description: |
+                        For where the matching started.
+                      example: 0
+              place_id:
+                type: string
+                maxLength: 255
+                description: >-
+                  It containes a textual identifier that uniquely identifies a
+                  place.
+                example: ChIJify3BTzI5zsR2q86fwXrh74
+              reference:
+                type: string
+                maxLength: 255
+                description: Contains reference id for the particular location.
+                example: ChIJify3BTzI5zsR2q86fwXrh74
+              structured_formatting:
+                type: object
+                description: >
+                  Provides pre-formatted text that can be shown in your
+                  autocomplete results.
+                properties:
+                  main_text:
+                    type: string
+                    maxLength: 255
+                    description: >
+                      contains the main text of a prediction, usually the name
+                      of the place.
+                    example: Andheri
+                  main_text_matched_substrings:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        length:
+                          type: number
+                          description: |
+                            For what length of the given text was matched.
+                          example: 4
+                        offset:
+                          type: number
+                          description: |
+                            For where the matching started.
+                          example: 0
+              terms:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    offset:
+                      type: number
+                      description: |
+                        For where the matching started.
+                      example: 0
+                    value:
+                      type: string
+                      description: |
+                        What was the value matched.
+                      example: Andheri
+              types:
+                types: array
+                description: >
+                  Contains an array of types that apply to this place. For more
+                  info visit
+                  https://developers.google.com/places/web-service/supported_type.
+        status:
+          type: string
+          enum:
+            - OK
+            - ZERO_RESULTS
+            - OVER_QUERY_LIMIT
+            - REQUEST_DENIED
+            - INVALID_REQUEST
+            - UNKNOWN_ERROR
+    get_location_autocomplete:
+      type: object
+      properties:
+        count:
+          $ref: '#/components/schemas/count'
+        url:
+          type: string
+          example: /v4/common/places_autocomplete
+        data:
+          $ref: '#/components/schemas/location_autocomplete'
+    location_geocode:
+      type: object
+      properties:
+        city:
+          type: string
+          example: London
+        state:
+          type: string
+          example: London
+        country:
+          type: string
+          example: United Kingdom
+        formatted_address:
+          type: string
+          example: '221 Baker St, Marylebone, London, United Kingdom'
+        latitude:
+          type: number
+          example: 12.971599
+        longitude:
+          type: number
+          example: 77.594566
+    get_location_geocode:
+      type: object
+      properties:
+        count:
+          $ref: '#/components/schemas/count'
+        url:
+          type: string
+          example: /v4/common/places_geocode
+        data:
+          $ref: '#/components/schemas/location_geocode'
+tags:
+  - name: Location
+    description: |
+      These APIs gives the location suggestions and geographic data of a place.
+paths:
+  /v4/common/places_autocomplete:
+    get:
+      tags:
+        - Location
+      summary: Returns a list of location suggestions
+      description: >
+        Provides the place suggestions based on given partial or full place
+        name.
+      operationId: GetLocationAutocomplete
+      parameters:
+        - $ref: '#/components/parameters/cordinates'
+        - $ref: '#/components/parameters/text'
+        - $ref: '#/components/parameters/types'
+        - $ref: '#/components/parameters/user_id'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_location_autocomplete'
+        '401':
+          description: Unauthorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+  '/v4/common/places_geocode/{place_id}':
+    get:
+      tags:
+        - Location
+      summary: Returns a geographic info of a place
+      description: |
+        Provides the exact geographic information for the given place id.
+      operationId: GetLocationGeocode
+      parameters:
+        - in: path
+          name: place_id
+          required: true
+          description: >
+            It containes a textual identifier that uniquely identifies a
+            place.<br>
+
+            place_id=ChIJify3BTzI5zsR2q86fwXrh74
+          schema:
+            type: string
+            example: ChIJify3BTzI5zsR2q86fwXrh74
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_location_geocode'
