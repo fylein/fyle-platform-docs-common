@@ -29,19 +29,19 @@ properties:
           See "https://www.iban.com/currency-codes" for examples.
       date:
         $ref: 'commons/created_at.yaml'
-      invoice_dt: "2020-01-02T10:00:00"
+      invoice_dt:
         type: string
         format: date-time
         description: |
           RFC 3339, section 5.6 "https://tools.ietf.org/html/rfc3339#section-5.6" compliant 
           Extracted timestamp on which the Expense was made.
-      vendor_name: "Com>"
+      vendor_name:
         type: string
         example: Uber
         maxLength: 255
         description: |
           Extracted string denoting the name of the vendor to which the Expense was made
-      source: "ROBOT"
+      source:
         type: string
         example: ROBOT
         description: |
