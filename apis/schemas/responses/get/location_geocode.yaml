@@ -1,0 +1,9 @@
+type: object
+properties:
+  count:
+    $ref: '../commons/count.yaml'
+  url:
+    type: string
+    example: '/v4/common/places_geocode'
+  data:
+    $ref: '../../objects/location_geocode.yaml'
