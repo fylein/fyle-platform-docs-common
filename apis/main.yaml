@@ -29,9 +29,9 @@ tags:
       These APIs gives you the expense relevant data from the reciepts.
 
 paths:
-  /v4/common/places_autocomplete:
+  /v4/common/places:
     $ref: 'paths/location_autocomplete.yaml'
-  /v4/common/places_geocode/{place_id}:
+  /v4/common/places/{id}:
     $ref: 'paths/location_geocode.yaml'
   /v4/common/vision_audits/{audit_id}:
     $ref: 'paths/vision_audits.yaml'
