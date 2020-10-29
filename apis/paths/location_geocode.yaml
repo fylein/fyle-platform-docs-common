@@ -7,7 +7,7 @@ get:
   operationId: GetLocationGeocode
   parameters:
     - in: path
-      name: place_id
+      name: id
       required: true
       description: |
         It containes a textual identifier that uniquely identifies a place.<br>
