@@ -9,7 +9,6 @@ get:
     - $ref: '../schemas/requests/location/cordinates.yaml'
     - $ref: '../schemas/requests/location/text.yaml'
     - $ref: '../schemas/requests/location/types.yaml'
-    - $ref: '../schemas/requests/commons/user_id.yaml'
 
   responses:
     '200':
