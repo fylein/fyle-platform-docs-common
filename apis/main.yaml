@@ -24,9 +24,16 @@ tags:
   - name: Location
     description: |
       These APIs gives the location suggestions and geographic data of a place.
+  - name: Data Extraction
+    description: |
+      These APIs gives you the expense relevant data from the reciepts.
 
 paths:
   /v4/common/places:
     $ref: 'paths/location_autocomplete.yaml'
   /v4/common/places/{id}:
     $ref: 'paths/location_geocode.yaml'
+  /v4/common/vision_audits/{audit_id}:
+    $ref: 'paths/vision_audits.yaml'
+  /v4/fyler/vision_extract:
+    $ref: 'paths/vision_extract.yaml'

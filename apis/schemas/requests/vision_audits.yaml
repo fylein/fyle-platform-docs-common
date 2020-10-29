@@ -1,0 +1,16 @@
+type: object
+properties:
+  data:
+    type: object
+    properties:
+      entered_data:
+        $ref: '../objects/expenses.yaml'
+      external_id:
+        type: string
+        description: |
+          The external id generated after creating the expense.
+  test:
+    type: boolean
+    example: false
+    default: false
+required: [ data ]
