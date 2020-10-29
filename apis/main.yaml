@@ -26,7 +26,7 @@ tags:
       These APIs gives the location suggestions and geographic data of a place.
   - name: Data Extraction
     description: |
-      These APIs gives you the expense relevant data from the reciepts.
+      These APIs gives you the expense relevant data from the reciepts
 
 paths:
   /v4/common/places:
