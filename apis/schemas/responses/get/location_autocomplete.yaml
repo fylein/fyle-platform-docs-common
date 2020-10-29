@@ -1,0 +1,18 @@
+type: object
+properties:
+  count:
+    $ref: '../commons/count.yaml'
+  url:
+    type: string
+    example: '/v4/common/places'
+  data:
+    $ref: '../../objects/location_autocomplete.yaml'
+  status:
+    type: string
+    enum:
+      - OK
+      - ZERO_RESULTS
+      - OVER_QUERY_LIMIT
+      - REQUEST_DENIED
+      - INVALID_REQUEST
+      - UNKNOWN_ERROR

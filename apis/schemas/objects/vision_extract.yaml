@@ -1,0 +1,48 @@
+type: object
+properties:
+  callback_url:
+    type: string
+    description: |
+      contains the callback url for auditing.
+    example: "https://in1.fylehq.com/vision_audits/aud8Ydg78GOh"
+  data:
+    type: object
+    properties:
+      amount:
+        type: number
+        description: |
+          The Extracted expense amount for which the expense may/will-be fyled.
+        example: 1500.0
+      category:
+        type: string
+        maxLength: 25
+        description: |
+          Extracted category of expense.
+        example: Flight
+      currency:
+        type: string
+        maxLength: 3
+        example: USD
+        description: |
+          Extracted currency from the given receipt. <br>
+          ISO 4217 currency codes that are usually of three upper case letters.
+          See "https://www.iban.com/currency-codes" for examples.
+      date:
+        $ref: 'commons/created_at.yaml'
+      invoice_dt:
+        type: string
+        format: date-time
+        description: |
+          RFC 3339, section 5.6 "https://tools.ietf.org/html/rfc3339#section-5.6" compliant 
+          Extracted timestamp on which the Expense was made.
+      vendor_name:
+        type: string
+        example: Uber
+        maxLength: 255
+        description: |
+          Extracted string denoting the name of the vendor to which the Expense was made
+      source:
+        type: string
+        example: ROBOT
+        description: |
+          The name of the client which is extracting the data.
