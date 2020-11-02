@@ -86,7 +86,7 @@ components:
       items:
         type: object
         properties:
-          description:
+          formatted_address:
             type: string
             maxLength: 255
             description: |
@@ -995,7 +995,7 @@ components:
           $ref: '#/components/schemas/org_name'
         actions:
           $ref: '#/components/schemas/expense_actions'
-    vision_audits:
+    vision_audit:
       type: object
       properties:
         data:
@@ -1080,25 +1080,24 @@ components:
     objects_vision_extract:
       type: object
       properties:
-        callback_url:
-          type: string
-          description: |
-            contains the callback url for auditing.
-          example: 'https://in1.fylehq.com/vision_audits/aud8Ydg78GOh'
         data:
           type: object
           properties:
+            callback_url:
+              type: string
+              description: |
+                Contains the callback url for auditing.
+              example: 'https://platform.fylehq.com/v1/vision_audit/aud8Ydg78GOh'
             amount:
               type: number
-              description: >
-                The Extracted expense amount for which the expense may/will-be
-                fyled.
+              description: |
+                Extracted expense amount from receipt.
               example: 1500
-            category:
+            category_name:
               type: string
               maxLength: 25
               description: |
-                Extracted category of expense.
+                Extracted category of expense from receipt.
               example: Flight
             currency:
               type: string
@@ -1127,7 +1126,7 @@ components:
               maxLength: 255
               description: >
                 Extracted string denoting the name of the vendor to which the
-                Expense was made
+                expense was made
             source:
               type: string
               example: ROBOT
@@ -1151,11 +1150,11 @@ tags:
     description: |
       These APIs gives the expense relevant data from the reciepts
 paths:
-  /v4/common/places:
+  /common/places:
     get:
       tags:
         - Places
-      summary: List all place suggestions
+      summary: List places
       description: |
         Lists all the place suggestions based on given query.
       operationId: GetPlacesAutocomplete
@@ -1176,11 +1175,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/401'
-  '/v4/common/places/{id}':
+  '/common/places/{id}':
     get:
       tags:
         - Places
-      summary: Retrieve geographic data of a place
+      summary: Retrieve geographic data
       description: |
         Gives the exact geographic data for the given place id.
       operationId: GetPlacesGeocode
@@ -1203,14 +1202,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/get_places@{id}'
-  '/v4/common/vision_audits/{id}':
+  '/common/vision_audit/{id}':
     post:
       tags:
         - Data Extraction
-      summary: Upsert audits
+      summary: Create or Update audit
       description: |
-        Create or update audits made on extracted data from a receipt.
-      operationId: PostVisionAudits
+        Create or Update audit made on extracted data from a receipt.
+      operationId: PostVisionAudit
       parameters:
         - in: path
           name: id
@@ -1228,7 +1227,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/vision_audits'
+              $ref: '#/components/schemas/vision_audit'
       responses:
         '200':
           description: OK
@@ -1258,13 +1257,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/403'
-  /v4/fyler/vision_extract:
+  /common/vision_extract:
     post:
       tags:
         - Data Extraction
-      summary: Retrieve the expense data from receipt
+      summary: Retrieve expense data from receipt
       description: |
-        Retrieves the expense related data from the given receipt.
+        Retrieve expense related data from the given receipt.
       operationId: PostVisionExtract
       requestBody:
         required: true
