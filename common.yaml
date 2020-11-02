@@ -19,25 +19,14 @@ components:
           scopes:
             common.*: Grant all COMMON actions
   parameters:
-    cordinates:
-      in: query
-      name: location
-      description: >
-        This param specifies the point around which you wish to retrieve place
-        information.<br>
-
-        location=latitude,longitude
-      schema:
-        type: string
-        example: '26.595889,85.4891037'
     text:
       in: query
       name: q
       required: true
       description: >
-        The query string on which to search. The Location Autocomplete service
-        will return candidate matches based on this string and order results
-        based on their perceived relevance.<br>
+        The query string on which to search. The service will return candidate
+        matches based on this string and order results based on their perceived
+        relevance.<br>
 
         text=bangalore
       schema:
@@ -53,6 +42,17 @@ components:
       schema:
         type: string
         example: (cities)
+    cordinates:
+      in: query
+      name: location
+      description: >
+        This param specifies the point around which you wish to retrieve place
+        information.<br>
+
+        location=latitude,longitude
+      schema:
+        type: string
+        example: '26.595889,85.4891037'
   schemas:
     '401':
       type: object
@@ -81,7 +81,7 @@ components:
         The total number of objects that can be requested.
       type: integer
       example: 10000
-    location_autocomplete:
+    places:
       type: array
       items:
         type: object
@@ -105,7 +105,7 @@ components:
             maxLength: 255
             description: Contains reference id for the particular location.
             example: ChIJify3BTzI5zsR2q86fwXrh74
-    get_location_autocomplete:
+    get_places:
       type: object
       properties:
         count:
@@ -114,7 +114,7 @@ components:
           type: string
           example: /v4/common/places
         data:
-          $ref: '#/components/schemas/location_autocomplete'
+          $ref: '#/components/schemas/places'
         status:
           type: string
           enum:
@@ -124,7 +124,7 @@ components:
             - REQUEST_DENIED
             - INVALID_REQUEST
             - UNKNOWN_ERROR
-    location_geocode:
+    'places@{id}':
       type: object
       properties:
         city:
@@ -145,14 +145,14 @@ components:
         longitude:
           type: number
           example: 77.594566
-    get_location_geocode:
+    'get_places@{id}':
       type: object
       properties:
         url:
           type: string
           example: /v4/common/places
         data:
-          $ref: '#/components/schemas/location_geocode'
+          $ref: '#/components/schemas/places@{id}'
     employee_id:
       type: string
       maxLength: 255
@@ -1007,10 +1007,6 @@ components:
               type: string
               description: |
                 The external id generated after creating the expense.
-        test:
-          type: boolean
-          example: false
-          default: false
       required:
         - data
     bulk_error:
@@ -1079,10 +1075,6 @@ components:
                   type: string
                 expense_date:
                   type: string
-        test:
-          type: boolean
-          example: false
-          default: false
       required:
         - data
     objects_vision_extract:
@@ -1152,33 +1144,32 @@ components:
         data:
           $ref: '#/components/schemas/objects_vision_extract'
 tags:
-  - name: Location
+  - name: Places
     description: |
-      These APIs gives the location suggestions and geographic data of a place.
+      These APIs gives the places suggestions and geographic data of a place.
   - name: Data Extraction
     description: |
-      These APIs gives you the expense relevant data from the reciepts
+      These APIs gives the expense relevant data from the reciepts
 paths:
   /v4/common/places:
     get:
       tags:
-        - Location
-      summary: Returns a list of location suggestions
-      description: >
-        Provides the place suggestions based on given partial or full place
-        name.
-      operationId: GetLocationAutocomplete
+        - Places
+      summary: List all place suggestions
+      description: |
+        Lists all the place suggestions based on given query.
+      operationId: GetPlacesAutocomplete
       parameters:
-        - $ref: '#/components/parameters/cordinates'
         - $ref: '#/components/parameters/text'
         - $ref: '#/components/parameters/types'
+        - $ref: '#/components/parameters/cordinates'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/get_location_autocomplete'
+                $ref: '#/components/schemas/get_places'
         '401':
           description: Unauthorized request
           content:
@@ -1188,17 +1179,17 @@ paths:
   '/v4/common/places/{id}':
     get:
       tags:
-        - Location
-      summary: Returns a geographic info of a place
+        - Places
+      summary: Retrieve geographic data of a place
       description: |
-        Provides the exact geographic information for the given place id.
-      operationId: GetLocationGeocode
+        Gives the exact geographic data for the given place id.
+      operationId: GetPlacesGeocode
       parameters:
         - in: path
           name: id
           required: true
           description: >
-            It containes a textual identifier that uniquely identifies a
+            It contains a textual identifier that uniquely identifies a
             place.<br>
 
             place_id=ChIJify3BTzI5zsR2q86fwXrh74
@@ -1211,15 +1202,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/get_location_geocode'
-  '/v4/common/vision_audits/{audit_id}':
+                $ref: '#/components/schemas/get_places@{id}'
+  '/v4/common/vision_audits/{id}':
     post:
       tags:
         - Data Extraction
-      summary: Post audits
+      summary: Upsert audits
       description: |
-        Post audits.
+        Create or update audits made on extracted data from a receipt.
       operationId: PostVisionAudits
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: >
+            It contains the audit id which can be found in Vision extract
+            response as a `callback_url`.<br>
+
+            id=audut94r4krk
+          schema:
+            type: string
+            example: audut94r4krk
       requestBody:
         required: true
         content:
@@ -1259,9 +1262,9 @@ paths:
     post:
       tags:
         - Data Extraction
-      summary: Extracts the expense data from receipt
+      summary: Retrieve the expense data from receipt
       description: |
-        Extracts the expense related data from the given receipt.
+        Retrieves the expense related data from the given receipt.
       operationId: PostVisionExtract
       requestBody:
         required: true
