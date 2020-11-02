@@ -1,0 +1,25 @@
+get:
+  tags:
+    - Places
+  summary: List all place suggestions
+  description: |
+    Lists all the place suggestions based on given query.
+  operationId: GetPlacesAutocomplete
+  parameters:
+    - $ref: '../schemas/requests/places/text.yaml'
+    - $ref: '../schemas/requests/places/types.yaml'
+    - $ref: '../schemas/requests/places/cordinates.yaml'
+
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/responses/get/places.yaml'
+    '401':
+      description: Unauthorized request
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/errors/401.yaml'

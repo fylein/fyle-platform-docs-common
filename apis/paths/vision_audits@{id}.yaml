@@ -2,10 +2,20 @@ post:
   tags:
     - Data Extraction
   summary:
-    Post audits
+    Upsert audits
   description: |
-    Post audits.
+    Create or update audits made on extracted data from a receipt.
   operationId: PostVisionAudits
+  parameters:
+    - in: path
+      name: id
+      required: true
+      description: |
+        It contains the audit id which can be found in Vision extract response as a `callback_url`.<br>
+        id=audut94r4krk
+      schema:
+        type: string
+        example: 'audut94r4krk'
   requestBody:
     required: true
     content:

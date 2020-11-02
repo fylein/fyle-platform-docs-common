@@ -1,16 +1,16 @@
 get:
   tags:
-    - Location
-  summary: Returns a geographic info of a place
+    - Places
+  summary: Retrieve geographic data of a place
   description: |
-    Provides the exact geographic information for the given place id.
-  operationId: GetLocationGeocode
+    Gives the exact geographic data for the given place id.
+  operationId: GetPlacesGeocode
   parameters:
     - in: path
       name: id
       required: true
       description: |
-        It containes a textual identifier that uniquely identifies a place.<br>
+        It contains a textual identifier that uniquely identifies a place.<br>
         place_id=ChIJify3BTzI5zsR2q86fwXrh74
       schema:
         type: string
@@ -22,4 +22,4 @@ get:
       content:
         application/json:
           schema:
-            $ref: '../schemas/responses/get/location_geocode.yaml'
+            $ref: '../schemas/responses/get/places@{id}.yaml'

@@ -6,7 +6,7 @@ properties:
     type: string
     example: '/v4/common/places'
   data:
-    $ref: '../../objects/location_autocomplete.yaml'
+    $ref: '../../objects/places.yaml'
   status:
     type: string
     enum:

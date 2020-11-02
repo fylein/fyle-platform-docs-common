@@ -33,8 +33,4 @@ properties:
             type: string
           expense_date:
             type: string
-  test:
-    type: boolean
-    example: false
-    default: false
 required: [ data ]

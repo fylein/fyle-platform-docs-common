@@ -4,4 +4,4 @@ properties:
     type: string
     example: '/v4/common/places'
   data:
-    $ref: '../../objects/location_geocode.yaml'
+    $ref: '../../objects/places@{id}.yaml'

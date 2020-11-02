@@ -2,9 +2,9 @@ post:
   tags:
     - Data Extraction
   summary:
-    Extracts the expense data from receipt
+    Retrieve the expense data from receipt
   description: |
-    Extracts the expense related data from the given receipt.
+    Retrieves the expense related data from the given receipt.
   operationId: PostVisionExtract
   requestBody:
     required: true

@@ -21,19 +21,19 @@ components:
             common.*: Grant all COMMON actions
 
 tags:
-  - name: Location
+  - name: Places
     description: |
-      These APIs gives the location suggestions and geographic data of a place.
+      These APIs gives the places suggestions and geographic data of a place.
   - name: Data Extraction
     description: |
-      These APIs gives you the expense relevant data from the reciepts
+      These APIs gives the expense relevant data from the reciepts
 
 paths:
   /v4/common/places:
-    $ref: 'paths/location_autocomplete.yaml'
+    $ref: 'paths/places.yaml'
   /v4/common/places/{id}:
-    $ref: 'paths/location_geocode.yaml'
-  /v4/common/vision_audits/{audit_id}:
-    $ref: 'paths/vision_audits.yaml'
+    $ref: 'paths/places@{id}.yaml'
+  /v4/common/vision_audits/{id}:
+    $ref: 'paths/vision_audits@{id}.yaml'
   /v4/fyler/vision_extract:
     $ref: 'paths/vision_extract.yaml'
