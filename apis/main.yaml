@@ -29,11 +29,11 @@ tags:
       These APIs gives the expense relevant data from the reciepts
 
 paths:
-  /v4/common/places:
+  /common/places:
     $ref: 'paths/places.yaml'
-  /v4/common/places/{id}:
+  /common/places/{id}:
     $ref: 'paths/places@{id}.yaml'
-  /v4/common/vision_audits/{id}:
+  /common/vision_audit/{id}:
     $ref: 'paths/vision_audits@{id}.yaml'
-  /v4/fyler/vision_extract:
+  /common/vision_extract:
     $ref: 'paths/vision_extract.yaml'

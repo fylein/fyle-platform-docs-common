@@ -2,10 +2,10 @@ post:
   tags:
     - Data Extraction
   summary:
-    Upsert audits
+    Create or Update audit
   description: |
-    Create or update audits made on extracted data from a receipt.
-  operationId: PostVisionAudits
+    Create or Update audit made on extracted data from a receipt.
+  operationId: PostVisionAudit
   parameters:
     - in: path
       name: id
@@ -21,7 +21,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: '../schemas/requests/vision_audits.yaml'
+          $ref: '../schemas/requests/vision_audit.yaml'
 
   responses:
     '200':

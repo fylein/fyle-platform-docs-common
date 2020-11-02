@@ -1,7 +1,7 @@
 get:
   tags:
     - Places
-  summary: Retrieve geographic data of a place
+  summary: Retrieve geographic data
   description: |
     Gives the exact geographic data for the given place id.
   operationId: GetPlacesGeocode

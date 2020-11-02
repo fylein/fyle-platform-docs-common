@@ -1,23 +1,23 @@
 type: object
 properties:
-  callback_url:
-    type: string
-    description: |
-      contains the callback url for auditing.
-    example: "https://in1.fylehq.com/vision_audits/aud8Ydg78GOh"
   data:
     type: object
     properties:
+      callback_url:
+        type: string
+        description: |
+          Contains the callback url for auditing.
+        example: "https://platform.fylehq.com/v1/vision_audit/aud8Ydg78GOh"
       amount:
         type: number
         description: |
-          The Extracted expense amount for which the expense may/will-be fyled.
+          Extracted expense amount from receipt.
         example: 1500.0
-      category:
+      category_name:
         type: string
         maxLength: 25
         description: |
-          Extracted category of expense.
+          Extracted category of expense from receipt.
         example: Flight
       currency:
         type: string
@@ -40,7 +40,7 @@ properties:
         example: Uber
         maxLength: 255
         description: |
-          Extracted string denoting the name of the vendor to which the Expense was made
+          Extracted string denoting the name of the vendor to which the expense was made
       source:
         type: string
         example: ROBOT

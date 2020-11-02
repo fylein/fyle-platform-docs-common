@@ -1,7 +1,7 @@
 get:
   tags:
     - Places
-  summary: List all place suggestions
+  summary: List places
   description: |
     Lists all the place suggestions based on given query.
   operationId: GetPlacesAutocomplete
