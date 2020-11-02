@@ -23,7 +23,7 @@ post:
             properties:
               url:
                 type: string
-                example: '/v4/common/vision_extract'
+                example: '/common/vision_extract'
               data:
                 type: array
                 items:

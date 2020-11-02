@@ -112,7 +112,7 @@ components:
           $ref: '#/components/schemas/count'
         url:
           type: string
-          example: /v4/common/places
+          example: /common/places
         data:
           $ref: '#/components/schemas/places'
         status:
@@ -150,7 +150,7 @@ components:
       properties:
         url:
           type: string
-          example: /v4/common/places
+          example: /common/places
         data:
           $ref: '#/components/schemas/places@{id}'
     employee_id:
@@ -1140,7 +1140,7 @@ components:
           $ref: '#/components/schemas/count'
         url:
           type: string
-          example: /v4/common/vision_extract
+          example: /common/vision_extract
         data:
           $ref: '#/components/schemas/objects_vision_extract'
 tags:
@@ -1151,7 +1151,7 @@ tags:
     description: |
       These APIs gives the expense relevant data from the reciepts
 paths:
-  /v4/common/places:
+  /common/places:
     get:
       tags:
         - Places
@@ -1176,7 +1176,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/401'
-  '/v4/common/places/{id}':
+  '/common/places/{id}':
     get:
       tags:
         - Places
@@ -1203,7 +1203,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/get_places@{id}'
-  '/v4/common/vision_audits/{id}':
+  '/common/vision_audits/{id}':
     post:
       tags:
         - Data Extraction
@@ -1258,7 +1258,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/403'
-  /v4/fyler/vision_extract:
+  /fyler/vision_extract:
     post:
       tags:
         - Data Extraction
@@ -1282,7 +1282,7 @@ paths:
                 properties:
                   url:
                     type: string
-                    example: /v4/common/vision_extract
+                    example: /common/vision_extract
                   data:
                     type: array
                     items:
