@@ -272,8 +272,6 @@ components:
     post_expense_extract:
       type: object
       properties:
-        count:
-          $ref: '#/components/schemas/count'
         url:
           type: string
           example: /common/expense_extract
