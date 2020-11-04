@@ -1,7 +1,5 @@
 type: object
 properties:
-  count:
-    $ref: '../commons/count.yaml'
   url:
     type: string
     example: '/common/expense_extract'
