@@ -4,6 +4,6 @@ properties:
     $ref: '../commons/count.yaml'
   url:
     type: string
-    example: '/common/vision_extract'
+    example: '/common/expense_extract'
   data:
-    $ref: '../../objects/vision_extract.yaml'
+    $ref: '../../objects/expense_extract.yaml'

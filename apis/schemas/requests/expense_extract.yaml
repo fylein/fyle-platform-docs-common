@@ -29,8 +29,8 @@ properties:
         description: |
           Additional optional data.
         properties:
-          sender_email:
+          email:
             type: string
-          expense_date:
+          spent_at:
             type: string
 required: [ data ]

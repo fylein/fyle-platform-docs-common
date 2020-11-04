@@ -9,6 +9,8 @@ properties:
     $ref: '../../objects/places.yaml'
   status:
     type: string
+    description: |
+      Contains the status of the request, and may contain debugging information to help you track down why the request failed.
     enum:
       - OK
       - ZERO_RESULTS

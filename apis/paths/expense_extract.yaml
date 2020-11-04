@@ -11,7 +11,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: '../schemas/requests/vision_extract.yaml'
+          $ref: '../schemas/requests/expense_extract.yaml'
 
   responses:
     '200':
@@ -23,11 +23,11 @@ post:
             properties:
               url:
                 type: string
-                example: '/common/vision_extract'
+                example: '/common/expense_extract'
               data:
                 type: array
                 items:
-                  $ref: '../schemas/responses/post/vision_extract.yaml'
+                  $ref: '../schemas/responses/post/expense_extract.yaml'
 
     '401':
       description: Unauthorised request

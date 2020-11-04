@@ -4,9 +4,9 @@ get:
   summary: List places
   description: |
     Lists all the place suggestions based on given query.
-  operationId: GetPlacesAutocomplete
+  operationId: GetPlaces
   parameters:
-    - $ref: '../schemas/requests/places/text.yaml'
+    - $ref: '../schemas/requests/places/q.yaml'
     - $ref: '../schemas/requests/places/types.yaml'
     - $ref: '../schemas/requests/places/cordinates.yaml'
 

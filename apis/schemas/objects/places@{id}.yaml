@@ -1,5 +1,10 @@
 type: object
 properties:
+  id:
+    type: string
+    maxLength: 255
+    description: It containes a textual identifier that uniquely identifies a place.
+    example: ChIJify3BTzI5zsR2q86fwXrh74
   city:
     type: string
     example: 'London'

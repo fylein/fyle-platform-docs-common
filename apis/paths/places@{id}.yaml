@@ -1,17 +1,17 @@
 get:
   tags:
     - Places
-  summary: Retrieve geographic data
+  summary: Retrieve place details
   description: |
     Gives the exact geographic data for the given place id.
-  operationId: GetPlacesGeocode
+  operationId: GetPlaceDetails
   parameters:
     - in: path
       name: id
       required: true
       description: |
         It contains a textual identifier that uniquely identifies a place.<br>
-        place_id=ChIJify3BTzI5zsR2q86fwXrh74
+        id=ChIJify3BTzI5zsR2q86fwXrh74
       schema:
         type: string
         example: 'ChIJify3BTzI5zsR2q86fwXrh74'

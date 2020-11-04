@@ -4,7 +4,7 @@ info:
   title: Fyle REST API
   contact:
     name: Integrations
-    email: support@fyle.in
+    email: support@fylehq.com
 servers:
   - url: 'https://accounts.fylehq.com'
     description: Live Server
