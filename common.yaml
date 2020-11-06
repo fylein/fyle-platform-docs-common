@@ -1057,12 +1057,6 @@ paths:
       description: |
         Post audits.
       operationId: PostVisionAudits
-      parameters:
-        - in: path
-          name: audit_id
-          schema:
-            type: string
-          required: true
       requestBody:
         required: true
         content:
