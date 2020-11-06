@@ -9,4 +9,4 @@ description: |
 schema:
   type: string
   example: '(cities)'
-  enum: [ (cities), (regions), geocode, address, establishment]
+  enum: [ (cities), (regions), geocode, address, establishment ]
