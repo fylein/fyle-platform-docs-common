@@ -1,0 +1,9 @@
+type: object
+properties:
+  count:
+    $ref: '../commons/count.yaml'
+  url:
+    type: string
+    example: '/v4/common/vision_extract'
+  data:
+    $ref: '../../objects/vision_extract.yaml'
