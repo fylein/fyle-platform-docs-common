@@ -321,7 +321,7 @@ paths:
       summary: List places
       description: |
         Lists all the place suggestions based on given query.
-      operationId: GetPlaces
+      operationId: get-places
       parameters:
         - $ref: '#/components/parameters/q'
         - $ref: '#/components/parameters/types'
@@ -346,7 +346,7 @@ paths:
       summary: Retrieve place details
       description: |
         Gives the exact geographic data for the given place id.
-      operationId: GetPlaceDetails
+      operationId: get-place-details
       parameters:
         - in: path
           name: id
@@ -373,7 +373,7 @@ paths:
       summary: Retrieve expense data from receipt
       description: |
         Retrieve expense related data from the given receipt.
-      operationId: PostVisionExtract
+      operationId: post-vision-extract
       requestBody:
         required: true
         content:
