@@ -4,7 +4,7 @@ get:
   summary: Retrieve place details
   description: |
     Gives the exact geographic data for the given place id.
-  operationId: GetPlaceDetails
+  operationId: get-place-details
   parameters:
     - in: path
       name: id

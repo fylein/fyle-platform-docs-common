@@ -5,7 +5,7 @@ post:
     Retrieve expense data from receipt
   description: |
     Retrieve expense related data from the given receipt.
-  operationId: PostVisionExtract
+  operationId: post-vision-extract
   requestBody:
     required: true
     content:
