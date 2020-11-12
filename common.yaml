@@ -122,18 +122,6 @@ components:
           example: /common/places
         data:
           $ref: '#/components/schemas/places'
-        status:
-          type: string
-          description: >
-            Contains the status of the request, and may contain debugging
-            information to help you track down why the request failed.
-          enum:
-            - OK
-            - ZERO_RESULTS
-            - OVER_QUERY_LIMIT
-            - REQUEST_DENIED
-            - INVALID_REQUEST
-            - UNKNOWN_ERROR
     'places@{id}':
       type: object
       properties:
@@ -220,11 +208,6 @@ components:
     objects_expense_extract:
       type: object
       properties:
-        callback_url:
-          type: string
-          description: |
-            Contains the callback url for auditing.
-          example: 'https://platform.fylehq.com/v1/vision_audit/aud8Ydg78GOh'
         amount:
           type: number
           description: |
@@ -386,15 +369,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  url:
-                    type: string
-                    example: /common/expense_extract
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/post_expense_extract'
+                $ref: '#/components/schemas/post_expense_extract'
         '400':
           description: Bad request
           content:
