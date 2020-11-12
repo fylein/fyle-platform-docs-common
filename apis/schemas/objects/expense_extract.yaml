@@ -1,10 +1,10 @@
 type: object
 properties:
-  callback_url:
-    type: string
-    description: |
-      Contains the callback url for auditing.
-    example: "https://platform.fylehq.com/v1/vision_audit/aud8Ydg78GOh"
+  # callback_url:
+  #   type: string
+  #   description: |
+  #     Contains the callback url for auditing.
+  #   example: "https://platform.fylehq.com/v1/vision_audit/aud8Ydg78GOh"
   amount:
     type: number
     description: |
