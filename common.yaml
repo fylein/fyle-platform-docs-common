@@ -159,42 +159,37 @@ components:
     expense_extract:
       type: object
       properties:
-        data:
+        client:
+          type: string
+          maxLength: 255
+          description: |
+            Takes the platform name from where this API is requested.
+          example: WEBAPP
+        files:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                maxLength: 255
+                description: |
+                  Takes the name of the file which contains the receipt.
+              content:
+                type: string
+                description: >
+                  This field takes the base64 encoded representation of the
+                  file.
+                example: JVBERi0xLjQKMSAwIG9iago8PAovVGl0bGUgKP7/KQovQ3JlYX...
+        meta:
           type: object
+          description: |
+            Additional optional data.
           properties:
-            client:
+            email:
               type: string
-              maxLength: 255
-              description: |
-                Takes the platform name from where this API is requested.
-              example: WEBAPP
-            files:
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                    maxLength: 255
-                    description: |
-                      Takes the name of the file which contains the receipt.
-                  content:
-                    type: string
-                    description: >
-                      This field takes the base64 encoded representation of the
-                      file.
-                    example: JVBERi0xLjQKMSAwIG9iago8PAovVGl0bGUgKP7/KQovQ3JlYX...
-            meta:
-              type: object
-              description: |
-                Additional optional data.
-              properties:
-                email:
-                  type: string
-                spent_at:
-                  type: string
-      required:
-        - data
+            spent_at:
+              type: string
     created_at:
       type: string
       format: date-time
@@ -260,21 +255,6 @@ components:
           example: /common/expense_extract
         data:
           $ref: '#/components/schemas/objects_expense_extract'
-    bulk_error:
-      type: object
-      properties:
-        row:
-          type: integer
-          description: |
-            This holds the info of which row contains bad data.
-        key:
-          type: string
-          description: |
-            This helps in identifying the error by unique key.
-        message:
-          type: string
-          description: |
-            This explains what the error is in `human readable` text.
     json_parsing_error:
       type: object
       properties:
@@ -362,7 +342,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/expense_extract'
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/expense_extract'
+              required:
+                - data
       responses:
         '200':
           description: OK
@@ -376,13 +361,12 @@ paths:
             application/json:
               schema:
                 oneOf:
-                  - type: array
-                    items:
-                      $ref: '#/components/schemas/bulk_error'
+                  - type: object
+                    properties:
+                      message:
+                        type: string
                     example:
-                      - row: 1
-                        key: Cost center abcd
-                        message: Invalid or duplicate cost center code
+                      message: Invalid content
                   - $ref: '#/components/schemas/json_parsing_error'
         '401':
           description: Unauthorised request
